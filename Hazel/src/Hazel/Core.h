@@ -1,12 +1,12 @@
-#pragma once
 
 
 #ifdef HZ_PLATFORM_WINDOWS
 	#ifdef HZ_BUILD_DLL
-		#define HAZEL_API __declspec(dllexport)
+		#define  HZ_API __declspec(dllexport)
 	#else
-		#define HAZEL_API __declspec(dllimport)	
+		#define HZ_API __declspec(dllimport)
 	#endif
-//#else
-//	#error hazel only suport Windows
-#endif
+
+#else
+	#error "only windows surppot!"
+#endif // HZ_PLATFORM_WINDOWS
