@@ -26,7 +26,7 @@ namespace Hazel {
 	class Event
 	{
 	public:
-		virtual ~Event() = default; // to learn default
+		virtual ~Event() = default; 
 		bool Handled = false;
 
 		virtual int GetCategoryFlags() const = 0;
@@ -39,7 +39,7 @@ namespace Hazel {
 		virtual std::string ToString() const { return GetName(); }
 	};
 
-	//to learn define and const
+
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType(){ return EventType::type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); } \
 								virtual const char* GetName() const override { return #type; }
@@ -51,7 +51,7 @@ namespace Hazel {
 	public:
 		EventDispatcher(Event& event) : m_Event(event) {}
 
-		// to learn template
+
 		template<typename T, typename F>
 		bool Dispatch(const F& func)
 		{
@@ -66,7 +66,6 @@ namespace Hazel {
 		Event& m_Event;
 	};
 
-	//to learn inline & and os
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
 		return os << e.ToString();
