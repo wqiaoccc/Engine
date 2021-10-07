@@ -20,6 +20,7 @@ Hazel::Application* Hazel::CreateApplication() {
 }
 
 /*
+// main 放在这里也可以，但是专门写个entryPoint.h更容易找到
 int main()
 {
 	Sandbox* sandbox = new Sandbox();

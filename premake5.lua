@@ -1,61 +1,67 @@
 workspace "HazelEngine"
- architecture "x64"
 
- configurations
- {
-  "Debug",
-  "Release",
-  "Dist"
- }
+	architecture "x64"
 
- outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
- project "Hazel"
- location "Hazel"
- kind "SharedLib"
- language "C++"
+	configurations
+	{
+		"Debug",
+		"Release",
+		"Dist"
+	}
 
- targetdir ("bin/" .. outputdir .. "/%{prj.name}")
- objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
- files
- {
-  "%{prj.name}/src/**.h",
-  "%{prj.name}/src/**.cpp"
- }
+project "Hazel"
+	location "Hazel"
+	kind "SharedLib"
+	language "C++"
 
- includedirs
- {
-  "%{prj.name}/vendor/spdlog/include"
- }
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
- filter "system:windows"
-  cppdialect "C++17"
-  staticruntime "On"
-  systemversion "latest"
+	pchheader "Hzpch.h"
+	pchsource "Hazel/src/Hzpch.cpp"
 
-  defines
-  {
-   "HZ_PLATFORM_WINDOWS",
-   "HZ_BUILD_DLL"
-  }
+	files
+	{
+	 "%{prj.name}/src/**.h",
+	 "%{prj.name}/src/**.cpp"
+	}
 
-  postbuildcommands
-  {
-   ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-  }
+	includedirs
+	{
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/src"
+	}
 
- filter "configurations:Debug"
-  defines "HZ_DEBUG"
-  symbols "On"
+	filter "system:windows"
+		cppdialect "C++17"
+		staticruntime "On"
+		systemversion "latest"
+	
+	defines
+	{
+	   "HZ_PLATFORM_WINDOWS",
+	   "HZ_BUILD_DLL"
+	}
 
- filter "configurations:Release"
-  defines "HZ_RELEASE"
-  optimize "On"
+	postbuildcommands
+	{
+		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+	}
 
- filter "configurations:Dist"
-  defines "HZ_DIST"
-  optimize "On"
+	filter "configurations:Debug"
+		defines "HZ_DEBUG"
+		symbols "On"
+
+	filter "configurations:Release"
+		defines "HZ_RELEASE"
+		optimize "On"
+
+	filter "configurations:Dist"
+		defines "HZ_DIST"
+		optimize "On"
 
 project "Sandbox"
  location "Sandbox"

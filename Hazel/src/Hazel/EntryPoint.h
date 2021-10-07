@@ -1,6 +1,5 @@
 
 
-#include<iostream>
 #ifdef HZ_PLATFORM_WINDOWS
 extern Hazel::Application* Hazel::CreateApplication() ;
 
@@ -18,7 +17,6 @@ int main(int argc, char** argv)
 	Hazel::Log::Init();
 	HZ_CORE_WARN("Init Log!");
 	HZ_INFO("Hello Log!");
-	//check_version();
 	//check_version();
 	auto app = Hazel::CreateApplication();
 	app->Run();

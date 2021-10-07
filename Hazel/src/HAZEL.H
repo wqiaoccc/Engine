@@ -1,3 +1,5 @@
+#include "Hzpch.h"
+
 #include "Hazel/Log.h"
 
 #include "Hazel/Application.h"

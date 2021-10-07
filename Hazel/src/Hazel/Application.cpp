@@ -1,3 +1,4 @@
+#include "Hzpch.h"  //放在.cpp里面
 #include "Application.h"
 
 #include "Events/ApplicationEvent.h"
